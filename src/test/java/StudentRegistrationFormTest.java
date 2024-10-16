@@ -58,7 +58,7 @@ public class StudentRegistrationFormTest {
         $(".table-responsive").shouldHave(text("Student Name")).shouldHave(text(firstName + " "+ lastName));
         $(".table-responsive").shouldHave(text("Student Email")).shouldHave(text(userEmail));
         $(".table-responsive").shouldHave(text("Gender")).shouldHave(text("Male"));
-        $(".table-responsive").shouldHave(text("Mobile")).shouldHave(text("0"));
+        $(".table-responsive").shouldHave(text("Mobile")).shouldHave(text("1234567890"));
         $(".table-responsive").shouldHave(text("Date of Birth")).shouldHave(text("22 May,2000"));
         $(".table-responsive").shouldHave(text("Subjects")).shouldHave(text("Maths"));
         $(".table-responsive").shouldHave(text("Hobbies")).shouldHave(text("Music"));
