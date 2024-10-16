@@ -17,32 +17,34 @@ public class StudentRegistrationFormTest {
         Configuration.browserSize = "1920 х 1080";
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
-        Configuration.holdBrowserOpen = false;
+        Configuration.holdBrowserOpen = true;
            }
 
     @Test
     void fillFormTest() {
 
-        String name = "Aleksey";
+        String firstName = "Aleksey";
+        String lastName = "Arkhipov";
+        String userEmail = "my@yandex.ru";
+        String userNumber = "1234567890";
 
         open("/automation-practice-form");
 
-        $("#firstName").setValue(name);
-        $("#lastName").setValue("Arkhipov");
-        $("#userEmail").setValue("my@yandex.ru");
+        $("#firstName").setValue(firstName);
+        $("#lastName").setValue(lastName);
+        $("#userEmail").setValue(userEmail);
         $("#genterWrapper").findElement(byText("Male")). click();
-        $("#userNumber").setValue("0987654321").scrollTo();
+        $("#userNumber").setValue(userNumber).scrollTo();
 
-        $("#dateOfBirth").hover(). click();
-        $(".react-datepicker__month-select").selectOption("May");
+        $("#dateOfBirthInput").click();
         $(".react-datepicker__year-select").selectOption("2000");
+        $(".react-datepicker__month-select").selectOption("May");
         $(".react-datepicker__day--022"). click();
 
         $("#subjectsInput").setValue("a").sendKeys(Keys.ENTER);
         $("#hobbiesWrapper").findElement(byText("Music")).click();
 
-        File image = new File("src/test/resources/1.jpg");
-        $("#uploadPicture").uploadFile(image);
+        $("#uploadPicture").uploadFromClasspath("1.jpg");
 
         $("#currentAddress").setValue("Moscow");
 
@@ -53,16 +55,16 @@ public class StudentRegistrationFormTest {
 
         $("#submit").click();
 
-        $(".modal-title").shouldHave(text("Thanks for submitting the form"));
-        $(".table-responsive").shouldHave(text("Student Name")).shouldHave(text(name + " "+ "Arkhipov"));
-        $(".table-responsive").shouldHave(text("Student Email")).shouldHave(text("my@yandex.ru"));
+        $(".modal-header").shouldHave(text("Thanks for submitting the form"));
+        $(".table-responsive").shouldHave(text("Student Name")).shouldHave(text(firstName + " "+ lastName));
+        $(".table-responsive").shouldHave(text("Student Email")).shouldHave(text(userEmail));
         $(".table-responsive").shouldHave(text("Gender")).shouldHave(text("Male"));
-        $(".table-responsive").shouldHave(text("Mobile")).shouldHave(text("0987654321"));
+        $(".table-responsive").shouldHave(text("Mobile")).shouldHave(text("0"));
         $(".table-responsive").shouldHave(text("Date of Birth")).shouldHave(text("22 May,2000"));
         $(".table-responsive").shouldHave(text("Subjects")).shouldHave(text("Maths"));
-        $(".table-responsive").shouldHave(text("Hobbies")).shouldHave(text("Hobbies"));
-        $(".table-responsive").shouldHave(text("Picture"));
+        $(".table-responsive").shouldHave(text("Hobbies")).shouldHave(text("Music"));
+        $(".table-responsive").shouldHave(text("Picture")).shouldHave(text("1.jpg"));
+        $(".table-responsive").shouldHave(text("Address")).shouldHave(text("Moscow"));
         $(".table-responsive").shouldHave(text("State and City")).shouldHave(text("Haryana Panipat"));
     }
-
 }
