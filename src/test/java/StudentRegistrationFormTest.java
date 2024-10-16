@@ -38,8 +38,7 @@ public class StudentRegistrationFormTest {
 
         $("#dateOfBirthInput").click();
         $(".react-datepicker__year-select").selectOption("2000");
-        $(".react-datepicker__month-select").selectOption("May");
-        $(".react-datepicker__day--022"). click();
+        $(".react-datepicker__month-select").selectOption("May");$(".react-datepicker__day--022"). click();
 
         $("#subjectsInput").setValue("a").sendKeys(Keys.ENTER);
         $("#hobbiesWrapper").findElement(byText("Music")).click();
